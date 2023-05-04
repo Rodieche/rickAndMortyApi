@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { CharacterList } from "./components/CharacterList";
+import { Footer } from './components/Footer';
 
 export const App = () => {
 
@@ -33,7 +34,6 @@ export const App = () => {
   return (
     <>
       <h1 className="is-size-1 has-text-centered">Rick and Morty API</h1>
-      <h3 className="has-text-centered">Develop by 0rangeH4t</h3>
       <nav className="pagination is-right" role="navigation" aria-label="pagination">
         { (page != 1)? <a className="pagination-previous" onClick={prevPage}>Anteror</a> : <a className="pagination-previous is-disabled">Anteror</a> }
         { (page != pages)? <a className="pagination-next" onClick={nextPage}>Siguiente</a>: <a className="pagination-next is-disabled">Siguiente</a> }
@@ -41,6 +41,7 @@ export const App = () => {
       <div className="columns margin-top">
         <CharacterList characters={characters}/>
       </div>
+      <Footer />
     </>
 
   )
