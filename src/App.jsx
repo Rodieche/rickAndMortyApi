@@ -8,6 +8,7 @@ export const App = () => {
   const [characters, setCharacters] = useState([]);
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState(1);
+  const [pages, setPages] = useState(null);
 
 
   useEffect(() => {
@@ -16,6 +17,7 @@ export const App = () => {
       const data = await resp.json();
       setCharacters(data.results);
       setLoading(false);
+      setPages(data.info.pages);
     } 
     fetchData();
   }, [page]);
@@ -32,9 +34,9 @@ export const App = () => {
     <>
       <h1 className="is-size-1 has-text-centered">Rick and Morty API</h1>
       <h3 className="has-text-centered">Develop by 0rangeH4t</h3>
-      <nav className="pagination is-centered" role="navigation" aria-label="pagination">
-        <a className="pagination-previous" onClick={prevPage}></a>
-        <a className="pagination-next" onClick={nextPage}>Next page</a>
+      <nav className="pagination is-right" role="navigation" aria-label="pagination">
+        { (page != 1)? <a className="pagination-previous" onClick={prevPage}>Anteror</a> : <a className="pagination-previous is-disabled">Anteror</a> }
+        { (page != pages)? <a className="pagination-next" onClick={nextPage}>Siguiente</a>: <a className="pagination-next is-disabled">Siguiente</a> }
       </nav>
       <div className="columns margin-top">
         <CharacterList characters={characters}/>
