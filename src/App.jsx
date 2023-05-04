@@ -1,35 +1,11 @@
-import { useEffect, useState } from "react"
+import { useFetchApi } from "./hooks/rickAndMortyAPI";
+
 import { CharacterList } from "./components/CharacterList";
 import { Footer } from './components/Footer';
 
 export const App = () => {
 
-  
-
-  const [characters, setCharacters] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const [pages, setPages] = useState(null);
-
-
-  useEffect(() => {
-    async function fetchData(){
-      const resp = await fetch(`https://rickandmortyapi.com/api/character?page=${page}`);
-      const data = await resp.json();
-      setCharacters(data.results);
-      setLoading(false);
-      setPages(data.info.pages);
-    } 
-    fetchData();
-  }, [page]);
-
-  const prevPage = () =>{
-    setPage(page - 1);
-  }
-
-  const nextPage = () =>{
-    setPage(page + 1);
-  }
+  const { characters, loading, page, pages, prevPage, nextPage } = useFetchApi(1);
 
   return (
     <>
