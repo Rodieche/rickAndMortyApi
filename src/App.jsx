@@ -41,6 +41,10 @@ export const App = () => {
       <div className="columns margin-top">
         <CharacterList characters={characters}/>
       </div>
+      <nav className="pagination is-right" role="navigation" aria-label="pagination">
+        { (page != 1)? <a className="pagination-previous" onClick={prevPage}>Anteror</a> : <a className="pagination-previous is-disabled">Anteror</a> }
+        { (page != pages)? <a className="pagination-next" onClick={nextPage}>Siguiente</a>: <a className="pagination-next is-disabled">Siguiente</a> }
+      </nav>
       <Footer />
     </>
 
