@@ -1,8 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Foldit&display=swap');
+
 .margin-top{
     margin-top: 20px;
 }
 
+.no-margin{
+    margin-bottom: -10px;
+}
+
+
 html, body{
     padding-left: 25px;
     padding-right: 25px;
+    background-color: #ccc;
+}
+
+.foldit{
+    font-family: 'Foldit', cursive;
 }
