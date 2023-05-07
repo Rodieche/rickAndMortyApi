@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { CharacterList } from "./components/CharacterList";
 import { Footer } from './components/Footer';
 
+import Swal from 'sweetalert2'
+
 export const App = () => {
 
   const [characters, setCharacters] = useState([]);
@@ -9,6 +11,18 @@ export const App = () => {
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(null);
 
+  const sweetalert = () => {
+    Swal.fire({
+      icon: 'info',
+      title: 'Cargando...',
+      text: 'Cargando informacion de la API...',
+      didOpen: () => {
+        Swal.showLoading()
+      }
+    })
+    return;
+
+  }
 
   useEffect(() => {
     async function fetchData(){
@@ -19,6 +33,7 @@ export const App = () => {
       setPages(data.info.pages);
     } 
     fetchData();
+    Swal.close();
   }, [page]);
 
   const prevPage = () =>{
@@ -29,8 +44,14 @@ export const App = () => {
     setPage(page + 1);
   }
 
+  if(loading){
+    return(
+      sweetalert()
+    )
+  }
+
   return (
-    <>
+    <>  
       <h1 className="is-size-1 has-text-centered foldit">Rick and Morty API</h1>
       <nav className="pagination is-right padding-lateral" role="navigation" aria-label="pagination">
         { (page != 1)? <a className="pagination-previous button is-primary" onClick={prevPage}>Anterior</a> : <a className="pagination-previous is-disabled">Anteror</a> }
@@ -45,6 +66,6 @@ export const App = () => {
       </nav>
       <Footer />
     </>
-
+    
   )
 }
